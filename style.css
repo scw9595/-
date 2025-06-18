@@ -1,0 +1,8 @@
+body { font-family: Arial; max-width:600px; margin:auto; padding:10px; }
+h1,h2 { text-align:center; }
+label { display:block; margin:10px 0; }
+input,textarea,button { width:100%; padding:8px; box-sizing:border-box; }
+#history .item { border:1px solid #ccc; padding:8px; margin-top:8px; border-radius:4px; }
+#equipList li { margin:8px 0; }
+a { text-decoration:none; color:#0066cc; font-size:1.2em; }
+a:hover { text-decoration:underline; }
