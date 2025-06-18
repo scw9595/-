@@ -57,4 +57,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+function exportToExcel() {
+  const wb = XLSX.utils.book_new();
+  const sheetNames = ['P2310', 'P2311', 'P2312'];
+
+  sheetNames.forEach(id => {
+    const data = loadAll(id).map(item => ({
+      날짜: item.date,
+      고객사: item.customer,
+      접수내용: item.reception,
+      점검내용: item.inspection,
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, id);
+  });
+
+  XLSX.writeFile(wb, '장비이력.xlsx');
+}
+
+// HTML에 버튼 추가 (예: equipment.html)
+const exportBtn = document.createElement('button');
+exportBtn.textContent = '엑셀 내보내기';
+exportBtn.onclick = exportToExcel;
+document.body.appendChild(exportBtn);
 
