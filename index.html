@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>장비 리스트</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>장비 목록</h1>
+  <ul id="equipList">
+    <li><a href="equipment.html?id=P2310">P2310</a></li>
+    <li><a href="equipment.html?id=P2311">P2311</a></li>
+    <li><a href="equipment.html?id=P2312">P2312</a></li>
+  </ul>
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
