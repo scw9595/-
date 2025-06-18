@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>장비 이력 입력</title><link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1 id="equipTitle"></h1>
-  <label>고객사<input id="customer"></label>
-  <label>접수내용<textarea id="reception"></textarea></label>
-  <label>점검내용<textarea id="inspection"></textarea></label>
-  <button id="saveBtn">저장</button>
-  <h2>저장된 이력</h2>
-  <div id="history"></div>
-  <button id="backBtn">← 목록으로</button>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>장비 이력 입력</title>
@@ -26,62 +8,74 @@
 </head>
 <body>
   <h1 id="equipTitle"></h1>
-  
-  <label>고객사
+
+  <div>
+    <label for="customer">고객사</label>
     <input id="customer" />
-  </label>
-  
-  <label>접수내용
+  </div>
+
+  <div>
+    <label for="reception">접수내용</label>
     <textarea id="reception"></textarea>
-  </label>
-  
-  <label>점검내용
+  </div>
+
+  <div>
+    <label for="inspection">점검내용</label>
     <textarea id="inspection"></textarea>
-  </label>
-  
+  </div>
+
   <button id="saveBtn">저장</button>
-  
+
   <h2>저장된 이력</h2>
   <div id="history"></div>
-  
+
   <button id="backBtn">← 목록으로</button>
-  
-  <!-- 엑셀 라이브러리 -->
+
+  <!-- Excel 라이브러리 -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-  
+
+  <!-- 기존 스크립트 -->
   <script src="script.js"></script>
-  
+
+  <!-- 엑셀 내보내기 버튼 추가 -->
   <script>
-    // 엑셀 내보내기 버튼 생성 및 이벤트
-    const exportBtn = document.createElement('button');
-    exportBtn.textContent = '엑셀 내보내기';
-    exportBtn.style.width = '100%';
-    exportBtn.style.padding = '10px';
-    exportBtn.style.marginTop = '10px';
-    document.body.appendChild(exportBtn);
-    
-    exportBtn.onclick = function () {
-      const id = new URL(location).searchParams.get('id');
-      if (!id) {
-        alert('장비 ID가 없습니다.');
-        return;
-      }
-      const data = JSON.parse(localStorage.getItem('hist_' + id) || '[]');
-      if (data.length === 0) {
-        alert('저장된 데이터가 없습니다.');
-        return;
-      }
-      const ws_data = data.map(item => ({
-        날짜: item.date,
-        고객사: item.customer,
-        접수내용: item.reception,
-        점검내용: item.inspection
-      }));
-      const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.json_to_sheet(ws_data);
-      XLSX.utils.book_append_sheet(wb, ws, id);
-      XLSX.writeFile(wb, id + '_장비이력.xlsx');
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+      const exportBtn = document.createElement('button');
+      exportBtn.textContent = '엑셀 내보내기';
+      exportBtn.style.width = '100%';
+      exportBtn.style.padding = '10px';
+      exportBtn.style.marginTop = '10px';
+      document.body.appendChild(exportBtn);
+
+      exportBtn.onclick = function () {
+        const id = new URL(location).searchParams.get('id');
+        if (!id) {
+          alert('장비 ID가 없습니다.');
+          return;
+        }
+        const data = JSON.parse(localStorage.getItem('hist_' + id) || '[]');
+        if (data.length === 0) {
+          alert('저장된 데이터가 없습니다.');
+          return;
+        }
+        const ws_data = data.map(item => ({
+          날짜: item.date,
+          고객사: item.customer,
+          접수내용: item.reception,
+          점검내용: item.inspection
+        }));
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(ws_data);
+        XLSX.utils.book_append_sheet(wb, ws, id);
+        XLSX.writeFile(wb, id + '_장비이력.xlsx');
+      };
+    });
   </script>
 </body>
 </html>
+
+
+  
+  
+
+
