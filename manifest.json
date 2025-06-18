@@ -1,0 +1,8 @@
+{
+  "name": "장비이력앱",
+  "short_name": "장비이력",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0066cc"
+}
